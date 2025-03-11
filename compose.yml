@@ -1,6 +1,6 @@
 services:
   updater:
-    image: ghcr.io/jonathanbout/cloudflare-updater:dev
+    image: ghcr.io/jonathanbout/cloudflare-dns-updater:dev
     build:
       context: .
       dockerfile: Dockerfile

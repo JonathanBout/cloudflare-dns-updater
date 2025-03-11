@@ -31,7 +31,7 @@ func updateDNS(ipv4 string, ipv6 string) error {
 	})
 
 	if err != nil {
-		return errors.New("error retrieving A record: " + err.Error())
+		return errors.New("error retrieving A records: " + err.Error())
 	}
 
 	aaaaRecords, err := cf.DNS.Records.List(ctx, dns.RecordListParams{
@@ -40,8 +40,10 @@ func updateDNS(ipv4 string, ipv6 string) error {
 	})
 
 	if err != nil {
-		return errors.New("error retrieving AAAA record: " + err.Error())
+		return errors.New("error retrieving AAAA records: " + err.Error())
 	}
+
+	// combine the A and AAAA records into a single slice of BatchPatchUnionParam
 
 	var recordPatches []dns.BatchPatchUnionParam
 
@@ -65,13 +67,14 @@ func updateDNS(ipv4 string, ipv6 string) error {
 		})
 	}
 
+	// update the records in a single batch
 	_, err = cf.DNS.Records.Batch(ctx, dns.RecordBatchParams{
 		ZoneID:  cloudflare.F(zoneId),
 		Patches: cloudflare.F(recordPatches),
 	})
 
 	if err != nil {
-		return errors.New("error updating AAAA record: " + err.Error())
+		return errors.New("error updating records: " + err.Error())
 	}
 
 	return nil
