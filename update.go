@@ -73,7 +73,7 @@ func updateDNS(ipv4 string, ipv6 string) error {
 }
 
 func appendIpv4Records(ctx context.Context, ipv4 string, updatedMessage string, recordPatches *[]dns.BatchPatchUnionParam, zoneId string, nameFilter dns.RecordListParamsName) error {
-	fmt.Println("looking for A records")
+	fmt.Println("looking for A records...")
 	aRecords, err := cf.DNS.Records.List(ctx, dns.RecordListParams{
 		Type:   cloudflare.F(dns.RecordListParamsTypeA),
 		ZoneID: cloudflare.F(zoneId),
@@ -84,7 +84,13 @@ func appendIpv4Records(ctx context.Context, ipv4 string, updatedMessage string, 
 		return errors.New("error retrieving A records: " + err.Error())
 	}
 
+	if len(aRecords.Result) == 0 {
+		fmt.Println("no A records found")
+		return nil
+	}
+
 	for i := range aRecords.Result {
+		fmt.Println("marking A record", aRecords.Result[i].Name, "for update")
 		*recordPatches = append(*recordPatches, dns.BatchPatchARecordParam{
 			ID: cloudflare.F(aRecords.Result[i].ID),
 			ARecordParam: dns.ARecordParam{
@@ -98,7 +104,7 @@ func appendIpv4Records(ctx context.Context, ipv4 string, updatedMessage string, 
 }
 
 func appendIpv6Records(ctx context.Context, ipv6 string, updatedMessage string, recordPatches *[]dns.BatchPatchUnionParam, zoneId string, nameFilter dns.RecordListParamsName) error {
-	fmt.Println("looking for AAAA records")
+	fmt.Println("looking for AAAA records...")
 
 	aaaaRecords, err := cf.DNS.Records.List(ctx, dns.RecordListParams{
 		Type:   cloudflare.F(dns.RecordListParamsTypeAAAA),
@@ -110,7 +116,13 @@ func appendIpv6Records(ctx context.Context, ipv6 string, updatedMessage string, 
 		return errors.New("error retrieving AAAA records: " + err.Error())
 	}
 
+	if len(aaaaRecords.Result) == 0 {
+		fmt.Println("no AAAA records found")
+		return nil
+	}
+
 	for i := range aaaaRecords.Result {
+		fmt.Println("marking AAAA record", aaaaRecords.Result[i].Name, "for update")
 		*recordPatches = append(*recordPatches, dns.BatchPatchAAAARecordParam{
 			ID: cloudflare.F(aaaaRecords.Result[i].ID),
 			AAAARecordParam: dns.AAAARecordParam{
