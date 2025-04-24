@@ -28,7 +28,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
       cancel-in-progress: true
-    runs-on: ubuntu-24.04-amd
+    runs-on: ubuntu-24.04 #-arm
     permissions:
       contents: read
       packages: write
