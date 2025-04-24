@@ -1,0 +1,10 @@
+/bin
+/README.md
+/.env
+/.env.example
+/.idea
+/.github
+/.git
+/.gitignore
+/.vscode
+/.DS_Store
