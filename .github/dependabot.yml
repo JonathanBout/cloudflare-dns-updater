@@ -8,12 +8,15 @@ updates:
   - package-ecosystem: "gomod" # See documentation for possible values
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "cron"
+      cronjob: "00 7 20 * *"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "cron"
+      cronjob: "00 7 20 * *"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "cron"
+      cronjob: "00 7 20 * *"
