@@ -2,7 +2,7 @@ module jonathanbout.dev/cloudflare-updater
 
 go 1.22.2
 
-require github.com/cloudflare/cloudflare-go/v4 v4.4.0 // direct
+require github.com/cloudflare/cloudflare-go/v4 v4.5.1 // direct
 
 require (
 	github.com/tidwall/gjson v1.18.0 // indirect
