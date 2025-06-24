@@ -7,7 +7,6 @@ import (
 )
 
 func getPing(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("ping received")
 	_, _ = io.WriteString(w, "pong\n")
 }
 

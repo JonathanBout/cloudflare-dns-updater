@@ -91,7 +91,7 @@ func appendIpv4Records(ctx context.Context, ipv4 string, updatedMessage string, 
 
 	for i := range aRecords.Result {
 		fmt.Println("marking A record", aRecords.Result[i].Name, "for update")
-		*recordPatches = append(*recordPatches, dns.BatchPatchAParam{
+		*recordPatches = append(*recordPatches, dns.BatchPatchARecordParam{
 			ID: cloudflare.F(aRecords.Result[i].ID),
 			ARecordParam: dns.ARecordParam{
 				Content: cloudflare.F(ipv4),
@@ -123,7 +123,7 @@ func appendIpv6Records(ctx context.Context, ipv6 string, updatedMessage string, 
 
 	for i := range aaaaRecords.Result {
 		fmt.Println("marking AAAA record", aaaaRecords.Result[i].Name, "for update")
-		*recordPatches = append(*recordPatches, dns.BatchPatchAAAAParam{
+		*recordPatches = append(*recordPatches, dns.BatchPatchAAAARecordParam{
 			ID: cloudflare.F(aaaaRecords.Result[i].ID),
 			AAAARecordParam: dns.AAAARecordParam{
 				Content: cloudflare.F(ipv6),
