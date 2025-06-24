@@ -31,7 +31,7 @@ EXPOSE 5000
 
 # healthcheck localhost:$DYNDNS_LISTEN_ADDR/ping (default 5000)
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s \
-  CMD /curl -f http://localhost:5000/ping || exit 1
+  CMD curl -f http://localhost:5000/ping || exit 1
 
 # Run
 CMD ["/cloudflare-updater"]
