@@ -16,7 +16,7 @@ COPY *.go ./
 # Build
 RUN CGO_ENABLED=0 GOOS=linux go build -o /cloudflare-updater
 
-FROM alpine:3.22 AS final
+FROM alpine:3.23 AS final
 
 COPY --from=build /cloudflare-updater /cloudflare-updater
 
