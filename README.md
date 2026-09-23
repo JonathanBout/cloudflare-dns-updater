@@ -1,3 +1,7 @@
+> [!NOTE]
+> As I use Cloudflare Tunnels nowadays, I do not need dynamic DNS anymore. Hence I'm not maintaining this project anymore.
+> Feel free to fork this repo and modify it to your likings!
+
 # Cloudflare DNS Updater
 This little webserver allows updating the Cloudflare DNS, by supplying ip addresses. It is protected by a simple password.
 
